@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react'
 import CommentList from './CommentList';
 class Article extends Component {
@@ -29,12 +30,39 @@ class Article extends Component {
 
         )
     }
+=======
+import React, { Component, PropTypes } from 'react'
+import CommentList from './CommentList'
 
-    handleClick = ev => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
+function Article(props) {
+    const { article, toggleOpen } = props
+    return (
+        <section>
+            <h3 onClick = {toggleOpen}>{article.title}</h3>
+            {getBody(props)}
+        </section>
+    )
 }
+
+Article.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        comments: PropTypes.array,
+        text: PropTypes.string
+    }).isRequired
+}
+>>>>>>> 57576f2b2085247fceecc7b5053f3342c63669a5
+
+function getBody(props) {
+    const { article, isOpen } = props
+    if (!isOpen) return null
+    return (
+        <div>
+            <p>{article.text}</p>
+            <CommentList comments = {article.comments} />
+        </div>
+    )
+}
+
 
 export default Article
