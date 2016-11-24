@@ -1,43 +1,5 @@
-<<<<<<< HEAD
-import React, {Component} from 'react';
-import Comment from './Comment';
 
-
-class CommentList extends Component {
-    constructor() {
-        super()
-        this.state = {
-            showComments: false
-        }
-    }
-
-    render() {
-        const {commentsArr} = this.props;
-        const commentToggleText = this.state.showComments ? "Скрыть комментарии" : "Показать коментарии"
-        const CommentList = commentsArr.map(comment => <li key={comment.id}><Comment comment={comment}/></li>);
-        const Comments = this.state.showComments ? CommentList : null
-
-        return (
-            <div>
-                <h4 onClick={this.toggleComments}>{ commentToggleText }</h4>
-                <ul>
-                    {Comments}
-                </ul>
-            </div>
-        )
-
-    }
-    toggleComments = event => {
-        this.setState({
-            showComments : !this.state. showComments
-        })
-    }
-}
-
-
-export default CommentList;
-=======
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
@@ -65,5 +27,10 @@ class CommentList extends Component {
     }
 }
 
+CommentList.propTypes = {
+    comments: PropTypes.arrayOf(PropTypes.object),
+    isOpen: PropTypes.bool.isRequired,
+    toggleOpen: PropTypes.func.isRequired
+}
 export default toggleOpen(CommentList)
->>>>>>> 57576f2b2085247fceecc7b5053f3342c63669a5
+

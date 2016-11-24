@@ -1,21 +1,4 @@
-<<<<<<< HEAD
-import React, {Component} from 'react';
 
-class Comment extends Component {
-
-    render() {
-        const {comment} = this.props;
-        return (
-            <div>
-                <h4>{comment.user}</h4>
-                <p>{comment.text}</p>
-            </div>
-        )
-    }
-}
-
-export default Comment;
-=======
 import React, { PropTypes } from 'react'
 
 function Comment(props) {
@@ -30,8 +13,12 @@ function Comment(props) {
 }
 
 Comment.propTypes = {
-    comment: PropTypes.object.isRequired
+    comment: PropTypes.shape({
+        title: PropTypes.string,
+        text: PropTypes.string,
+        user: PropTypes.string
+    }).isRequired
 }
 
 export default Comment
->>>>>>> 57576f2b2085247fceecc7b5053f3342c63669a5
+
