@@ -34,6 +34,7 @@ class CommentForm extends Component {
     }
 
     handleInputChange = (e) => {
+        //хорошо, но я б предпочел карринг вместо target.name
         this.setState({[e.target.name]: e.target.value})
     }
 
