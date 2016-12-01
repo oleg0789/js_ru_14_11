@@ -28,7 +28,7 @@ class App extends Component {
 
     render() {
         // const {optionList}  = this.state.options
-         const {options}  = this.props
+         const {options, value}  = this.props
          const options2 = options.map(article => ({
             label: article.title,
             value: article.id
@@ -40,7 +40,7 @@ class App extends Component {
                 <DateRange />
                 <ArticleList />
 
-               <Select options = {options2} value = {this.state.selected} onChange = {this.handleChange} multi = {true}/>
+               <Select options = {options2} value = {value} onChange = {this.handleChange} multi = {true}/>
             </div>
         )
     }
@@ -48,9 +48,9 @@ class App extends Component {
     handleChange = selected => {
         const {value, selectFilter} = this.props
         this.setState({ selected })
-        selectFilter(this.state.selected)
+        selectFilter(selected)
     }
 }
 
-export default (connect(state=>({options: state.articles}), {selectFilter}
+export default (connect(state=>({options: state.articles, value: state.selected}), {selectFilter}
 ))(App)

@@ -13,12 +13,14 @@ class DateRange extends Component {
 
     handleDayClick = (e, day) => {
         this.setState(DateUtils.addDayToRange(day, this.state))
-        const payload = {
-            from: this.state.from,
-            to: this.state.to
-        }
-        dateFilter(payload)
+        const {dateFilter} = this.props
+        const {from, to} = this.state
+
+        //if(from && to ) {
+            dateFilter({from: from, to: to})
+      //  }
     }
+
 
     render() {
         const { from, to } = this.state;

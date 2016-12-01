@@ -1,12 +1,10 @@
 import {DATE_FILTER} from '../constants'
 
-export function dateFilter(from=null, to=null) {
+export function dateFilter(from, to) {
     return {
         type: DATE_FILTER,
         payload: {
-            from: from,
-            to: to
-
+            from, to
         }
     }
 }

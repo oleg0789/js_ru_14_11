@@ -6,8 +6,10 @@ export default (articleState = articles, action) => {
 
     switch (type) {
         case SELECT_FILTER:
-            if (payload.selected == null) return articleState
-             return articleState.filter(article => article.id == payload.selected.value)
+             console.log(payload)
+
+            return articleState.filter( article =>  article.id == '56c782f197fe2bad471b3740' )
+
     }
     return articleState
 }
