@@ -5,15 +5,31 @@ import Chart from './Chart'
 import DateRange from './DateRange'
 import Counter from './Counter'
 import 'react-select/dist/react-select.css'
+import store from '../store'
+import { connect } from 'react-redux'
+import {selectFilter} from '../AC/selectFilter'
 
 class App extends Component {
 
     state = {
         selected: null
+       // options: store.getState().articles
+    }
+
+//     componentDidMount() {
+//        store.subscribe(this.onArticlesChange)
+// }
+    onArticlesChange =() => {
+      this.props.optionList = store.getState().articles
+       // this.setState({
+          //  options: store.getState().articles
+      //  })
     }
 
     render() {
-        const options = [].map(article => ({
+        // const {optionList}  = this.state.options
+         const {options}  = this.props
+         const options2 = options.map(article => ({
             label: article.title,
             value: article.id
         }))
@@ -23,12 +39,18 @@ class App extends Component {
                 <Chart />
                 <DateRange />
                 <ArticleList />
-                <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi = {true}/>
+
+               <Select options = {options2} value = {this.state.selected} onChange = {this.handleChange} multi = {true}/>
             </div>
         )
     }
 
-    handleChange = selected => this.setState({ selected })
+    handleChange = selected => {
+        const {value, selectFilter} = this.props
+        this.setState({ selected })
+        selectFilter(this.state.selected)
+    }
 }
 
-export default App
+export default (connect(state=>({options: state.articles}), {selectFilter}
+))(App)
